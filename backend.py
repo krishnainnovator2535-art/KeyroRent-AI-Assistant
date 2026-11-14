@@ -1,6 +1,4 @@
-
 import os
-import sys
 from pathlib import Path
 from typing import List, Literal
 
@@ -9,11 +7,11 @@ from pydantic import BaseModel, Field
 from dotenv import load_dotenv
 
 from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_core.prompts import ChatPromptTemplate
 
 from knowledge_base import (
     load_faqs,
-    load_embedding_model,
-    load_vector_store
+    load_bm25_index
 )
 
 from chatbot import keyrorent_chatbot_with_memory
@@ -22,6 +20,7 @@ from chatbot import keyrorent_chatbot_with_memory
 # PROJECT CONFIGURATION
 
 BASE_DIR = Path(__file__).resolve().parent
+
 load_dotenv(BASE_DIR / ".env")
 
 
@@ -43,14 +42,10 @@ llm = ChatGoogleGenerativeAI(
 
 faqs = load_faqs()
 
-embedding_model = load_embedding_model()
-
-vector_store = load_vector_store(embedding_model)
+bm25_index = load_bm25_index(faqs)
 
 
-# CHATBOT CONFIGURATION
-
-RELEVANCE_THRESHOLD = 20.0
+# FASTAPI CONFIGURATION
 
 app = FastAPI(
     title="KeyroRent AI Assistant API",
@@ -61,78 +56,38 @@ app = FastAPI(
 
 print("KeyroRent backend initialized successfully!")
 print("Total FAQs:", len(faqs))
+print("Retrieval engine: BM25")
 
 
 # API REQUEST AND RESPONSE MODELS
 
 class ChatMessage(BaseModel):
+
     role: Literal["user", "assistant"]
+
     content: str
 
 
 class ChatRequest(BaseModel):
+
     question: str = Field(
         min_length=1,
         description="Customer rental support question"
     )
+
     chat_history: List[ChatMessage] = Field(
         default_factory=list
     )
 
 
 class ChatResponse(BaseModel):
+
     question: str
+
     answer: str
 
 
-print("API models added successfully!")
-
-
-# HOME ENDPOINT
-
-@app.get("/")
-def home():
-    return {
-        "message": "Welcome to KeyroRent AI Assistant API",
-        "status": "Running"
-    }
-
-
-# CHAT ENDPOINT
-
-@app.post("/chat", response_model=ChatResponse)
-def chat(request: ChatRequest):
-
-    history = [
-        {
-            "role": message.role,
-            "content": message.content
-        }
-        for message in request.chat_history
-    ]
-
-    answer = keyrorent_chatbot_with_memory(
-        question=request.question,
-        chat_history=history,
-        llm=llm,
-        vector_store=vector_store,
-        rag_prompt=rag_prompt,
-        conversation_context_prompt=conversation_context_prompt,
-        relevance_threshold=RELEVANCE_THRESHOLD
-    )
-
-    return ChatResponse(
-        question=request.question,
-        answer=answer
-    )
-
-
-print("FastAPI endpoints added successfully!")
-
 # PROMPT CONFIGURATION
-
-from langchain_core.prompts import ChatPromptTemplate
-
 
 rag_prompt = ChatPromptTemplate.from_messages([
     (
@@ -206,4 +161,45 @@ Standalone English Question:
 ])
 
 
+# HOME ENDPOINT
+
+@app.get("/")
+def home():
+
+    return {
+        "message": "Welcome to KeyroRent AI Assistant API",
+        "status": "Running"
+    }
+
+
+# CHAT ENDPOINT
+
+@app.post("/chat", response_model=ChatResponse)
+def chat(request: ChatRequest):
+
+    history = [
+        {
+            "role": message.role,
+            "content": message.content
+        }
+        for message in request.chat_history
+    ]
+
+    answer = keyrorent_chatbot_with_memory(
+        question=request.question,
+        chat_history=history,
+        llm=llm,
+        bm25_index=bm25_index,
+        rag_prompt=rag_prompt,
+        conversation_context_prompt=conversation_context_prompt
+    )
+
+    return ChatResponse(
+        question=request.question,
+        answer=answer
+    )
+
+
+print("API models added successfully!")
 print("Prompt configurations added successfully!")
+print("FastAPI endpoints added successfully!")

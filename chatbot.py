@@ -1,4 +1,3 @@
-
 import re
 
 from language import (
@@ -10,6 +9,128 @@ from language import (
 )
 
 from classifier import classify_question, old_classify_question
+
+
+# KEYWORD RELEVANCE VALIDATION
+
+STOP_WORDS = {
+    "does", "do", "did", "is", "are", "was", "were",
+    "can", "could", "would", "should",
+    "what", "how", "when", "where", "which",
+    "the", "a", "an", "to", "for", "of", "in",
+    "on", "my", "me", "i", "we", "you",
+    "and", "or", "be", "it",
+    "keyrorent", "provide", "get", "have",
+    "please", "tell", "about", "want"
+}
+
+SYNONYMS = {
+    "money": {"refund", "reimbursement"},
+    "back": {"refund", "returned"},
+    "collect": {"pickup"},
+    "pick": {"pickup"},
+    "car": {"vehicle"},
+    "automobile": {"vehicle"},
+    "vehicle": {"car"},
+    "cancel": {"cancellation"},
+    "cancellation": {"cancel"},
+    "reservation": {"booking"},
+    "booking": {"reservation"},
+    "documents": {"document"},
+    "document": {"documents"},
+    "late": {"delay", "delayed"},
+    "delay": {"late"},
+    "drivers": {"driver"},
+    "driver": {"drivers"}
+}
+
+
+def important_tokens(text):
+
+    text = text.lower()
+
+    # Normalize equivalent extra-driver phrases
+    phrase_patterns = {
+        r"\bextra driver\b": "extradriver",
+        r"\badditional driver\b": "extradriver",
+        r"\banother person (?:to )?drive\b": "extradriver",
+        r"\bsomeone else (?:to )?drive\b": "extradriver"
+    }
+
+    for pattern, replacement in phrase_patterns.items():
+        text = re.sub(pattern, replacement, text)
+
+    words = re.findall(r"\b\w+\b", text)
+
+    ignored_words = STOP_WORDS | {
+        "rental", "rented", "vehicle", "vehicles", "rent"
+    }
+
+    return {
+        word for word in words
+        if word not in ignored_words
+    }
+
+
+def expand_important_tokens(text):
+
+    tokens = important_tokens(text)
+
+    expanded = set(tokens)
+
+    for token in tokens:
+        expanded.update(
+            SYNONYMS.get(token, set())
+        )
+
+    return expanded
+
+
+def calculate_keyword_overlap(query, document_question):
+
+    query_tokens = expand_important_tokens(query)
+
+    document_tokens = expand_important_tokens(
+        document_question
+    )
+
+    if not query_tokens:
+        return 0.0
+
+    common_tokens = query_tokens.intersection(
+        document_tokens
+    )
+
+    return len(common_tokens) / len(query_tokens)
+
+
+def select_relevant_documents(query, results, max_docs=10):
+
+    relevant_docs = []
+
+    for doc, score in results:
+
+        faq_question = doc.metadata.get("question", "")
+
+        overlap = calculate_keyword_overlap(
+            query,
+            faq_question
+        )
+
+        relevant_docs.append(
+            (doc, float(score), overlap)
+        )
+
+    relevant_docs.sort(
+        key=lambda item: (item[1], item[2]),
+        reverse=True
+    )
+
+    return [
+        doc
+        for doc, score, overlap
+        in relevant_docs[:max_docs]
+    ]
 
 
 def build_context_aware_search_question(
@@ -85,11 +206,16 @@ def build_context_aware_search_question(
     return contextual_question
 
 
-def get_smart_response(question, llm=None):
+# SMART RESPONSES
+
+
+def get_smart_response(question, llm=None, chat_history=None):
+
+    if chat_history is None:
+        chat_history = []
 
     category = classify_question(question)
 
-    # Preserve short refund request handling
     if category == "rental":
         category = old_classify_question(question)
 
@@ -133,21 +259,36 @@ def get_smart_response(question, llm=None):
     elif language == "Roman Telugu":
         answer = convert_to_roman_telugu(answer, llm)
 
+    chat_history.append({
+        "role": "user",
+        "content": question
+    })
+
+    chat_history.append({
+        "role": "assistant",
+        "content": answer
+    })
+
     return answer
+
+
+# SINGLE QUESTION CHATBOT
 
 
 def keyrorent_single_question_with_memory(
     question,
     chat_history=None,
     llm=None,
-    vector_store=None,
+    bm25_index=None,
     rag_prompt=None,
-    conversation_context_prompt=None,
-    relevance_threshold=None
+    conversation_context_prompt=None
 ):
 
     if chat_history is None:
         chat_history = []
+
+    if bm25_index is None:
+        raise ValueError("BM25 index is not initialized.")
 
     language = detect_language(question)
 
@@ -185,22 +326,35 @@ def keyrorent_single_question_with_memory(
         )
 
         if language == "Telugu":
-            return convert_to_telugu(general_answer, llm)
+            general_answer = convert_to_telugu(general_answer, llm)
 
         elif language == "Roman Telugu":
-            return convert_to_roman_telugu(general_answer, llm)
+            general_answer = convert_to_roman_telugu(general_answer, llm)
+
+        chat_history.append({
+            "role": "user",
+            "content": question
+        })
+
+        chat_history.append({
+            "role": "assistant",
+            "content": general_answer
+        })
 
         return general_answer
 
-    results = vector_store.similarity_search_with_score(
+    # BM25 RETRIEVAL
+
+    results = bm25_index.similarity_search_with_score(
         search_question,
         k=10
     )
 
-    relevant_docs = [
-        doc for doc, score in results
-        if float(score) < relevance_threshold
-    ]
+    relevant_docs = select_relevant_documents(
+        search_question,
+        results,
+        max_docs=3
+    )
 
     if not relevant_docs:
 
@@ -210,12 +364,25 @@ def keyrorent_single_question_with_memory(
         )
 
         if language == "Telugu":
-            return convert_to_telugu(unavailable_message, llm)
+            unavailable_message = convert_to_telugu(unavailable_message, llm)
 
         elif language == "Roman Telugu":
-            return convert_to_roman_telugu(unavailable_message, llm)
+            unavailable_message = convert_to_roman_telugu(unavailable_message, llm)
+
+        chat_history.append({
+            "role": "user",
+            "content": question
+        })
+
+        chat_history.append({
+            "role": "assistant",
+            "content": unavailable_message
+        })
 
         return unavailable_message
+
+    if rag_prompt is None:
+        raise ValueError("RAG prompt is not configured.")
 
     context = "\n\n".join(
         doc.page_content for doc in relevant_docs
@@ -247,17 +414,29 @@ def keyrorent_single_question_with_memory(
     elif language == "Roman Telugu":
         answer = convert_to_roman_telugu(answer, llm)
 
+    chat_history.append({
+        "role": "user",
+        "content": question
+    })
+
+    chat_history.append({
+        "role": "assistant",
+        "content": answer
+    })
+
     return answer
+
+
+# MULTI-QUESTION CHATBOT
 
 
 def keyrorent_chatbot_with_memory(
     question,
     chat_history=None,
     llm=None,
-    vector_store=None,
+    bm25_index=None,
     rag_prompt=None,
-    conversation_context_prompt=None,
-    relevance_threshold=None
+    conversation_context_prompt=None
 ):
 
     if chat_history is None:
@@ -276,7 +455,8 @@ def keyrorent_chatbot_with_memory(
 
         smart_answer = get_smart_response(
             questions[0],
-            llm
+            llm,
+            chat_history
         )
 
         if smart_answer is not None:
@@ -286,20 +466,21 @@ def keyrorent_chatbot_with_memory(
             questions[0],
             chat_history,
             llm,
-            vector_store,
+            bm25_index,
             rag_prompt,
-            conversation_context_prompt,
-            relevance_threshold
+            conversation_context_prompt
         )
 
     answers = []
-    updated_history = list(chat_history)
+
+    updated_history = chat_history
 
     for index, current_question in enumerate(questions, start=1):
 
         smart_answer = get_smart_response(
             current_question,
-            llm
+            llm,
+            updated_history
         )
 
         if smart_answer is not None:
@@ -310,22 +491,12 @@ def keyrorent_chatbot_with_memory(
                 current_question,
                 updated_history,
                 llm,
-                vector_store,
+                bm25_index,
                 rag_prompt,
-                conversation_context_prompt,
-                relevance_threshold
+                conversation_context_prompt
             )
 
         answers.append(f"{index}. {answer}")
 
-        updated_history.append({
-            "role": "user",
-            "content": current_question
-        })
-
-        updated_history.append({
-            "role": "assistant",
-            "content": answer
-        })
 
     return "\n\n".join(answers)

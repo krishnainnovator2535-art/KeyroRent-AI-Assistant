@@ -1,0 +1,441 @@
+[
+    {
+        "question": "What is KeyroRent?",
+        "answer": "KeyroRent is a rental platform that helps customers find and rent properties or rental services."
+    },
+    {
+        "question": "How can I contact customer support?",
+        "answer": "Customers can contact customer support through the official support channel provided by KeyroRent."
+    },
+    {
+        "question": "How can I make a booking?",
+        "answer": "Customers can browse available rental options, select their preferred option, and follow the booking instructions on the platform."
+    },
+    {
+        "question": "Can I cancel my booking?",
+        "answer": "Booking cancellation depends on the cancellation policy applicable to the selected rental."
+    },
+    {
+        "question": "How do I get a refund?",
+        "answer": "Refund eligibility and processing time depend on the applicable rental and refund policy."
+    },
+    {
+        "question": "What should I do if I face a technical issue?",
+        "answer": "Customers should contact the support team and provide details about the issue they are facing."
+    },
+    {
+        "question": "How can I create a KeyroRent account?",
+        "answer": "Customers can create an account by following the registration process and providing the required information."
+    },
+    {
+        "question": "How do I log in to my KeyroRent account?",
+        "answer": "Customers can log in using their registered account credentials."
+    },
+    {
+        "question": "What should I do if I forget my password?",
+        "answer": "Customers should use the password recovery option, if available, to reset their password."
+    },
+    {
+        "question": "Can I update my profile information?",
+        "answer": "Customers can update their profile information through the account settings, if this feature is available."
+    },
+    {
+        "question": "How can I delete my account?",
+        "answer": "Customers should contact the official support team to understand the account deletion process."
+    },
+    {
+        "question": "How can I find available rental options?",
+        "answer": "Customers can browse rental listings and review the available options on the platform."
+    },
+    {
+        "question": "How do I check whether a rental is available?",
+        "answer": "Customers can check the availability information provided in the selected rental listing."
+    },
+    {
+        "question": "Can I book a rental in advance?",
+        "answer": "Advance booking depends on the availability and booking options provided for the selected rental."
+    },
+    {
+        "question": "How do I know whether my booking is confirmed?",
+        "answer": "Customers should check their booking status and confirmation details through the platform."
+    },
+    {
+        "question": "Can I change my booking date?",
+        "answer": "Booking date changes depend on the applicable rental modification policy and availability."
+    },
+    {
+        "question": "Can I modify my rental booking?",
+        "answer": "Booking modifications depend on the terms and conditions applicable to the selected rental."
+    },
+    {
+        "question": "Where can I find my booking details?",
+        "answer": "Customers can check their booking details through the account or booking history section, if available."
+    },
+    {
+        "question": "What payment methods can I use?",
+        "answer": "Customers should check the payment methods displayed on the official platform during checkout."
+    },
+    {
+        "question": "Why did my rental payment fail?",
+        "answer": "Payment failures can occur for different reasons. Customers should verify their payment details and transaction status."
+    },
+    {
+        "question": "How can I verify my payment transaction?",
+        "answer": "Customers can review their transaction details through the available payment or booking section."
+    },
+    {
+        "question": "Will I receive payment confirmation?",
+        "answer": "Customers should check the platform for payment confirmation and transaction status."
+    },
+    {
+        "question": "How can I understand the rental price?",
+        "answer": "Customers should review the pricing details displayed in the selected rental listing before booking."
+    },
+    {
+        "question": "Are there any hidden charges?",
+        "answer": "Customers should review the complete pricing breakdown and applicable terms before confirming a booking."
+    },
+    {
+        "question": "What should I do if I am charged twice?",
+        "answer": "Customers should retain both transaction references and contact the official support team for assistance."
+    },
+    {
+        "question": "How can I cancel a confirmed booking?",
+        "answer": "Customers should follow the cancellation process provided for their selected rental."
+    },
+    {
+        "question": "Will I get a refund after cancelling?",
+        "answer": "Refund eligibility depends on the applicable cancellation and refund policy."
+    },
+    {
+        "question": "How can I check my refund status?",
+        "answer": "Customers should check their refund or transaction status through the available platform details or contact support."
+    },
+    {
+        "question": "Why is my refund delayed?",
+        "answer": "Refund delays can depend on the applicable refund process and payment provider. Customers should contact support for assistance."
+    },
+    {
+        "question": "Can I request a refund for a failed booking?",
+        "answer": "Refund eligibility for failed bookings depends on the transaction status and applicable refund policy."
+    },
+    {
+        "question": "What should I do if my refund is not received?",
+        "answer": "Customers should keep their transaction reference and contact the official support team."
+    },
+    {
+        "question": "Can I extend my rental duration?",
+        "answer": "Rental extensions depend on availability and the terms applicable to the selected rental."
+    },
+    {
+        "question": "What happens if I return a rental late?",
+        "answer": "Late return conditions and any applicable charges depend on the rental agreement."
+    },
+    {
+        "question": "How can I check my rental end date?",
+        "answer": "Customers should review their booking confirmation or rental details to find the rental end date."
+    },
+    {
+        "question": "Can I return a rental before the scheduled date?",
+        "answer": "Early returns depend on the terms and conditions applicable to the selected rental."
+    },
+    {
+        "question": "What should I do if I cannot return my rental on time?",
+        "answer": "Customers should contact the rental provider or official support team as soon as possible."
+    },
+    {
+        "question": "How can I contact the KeyroRent support team?",
+        "answer": "Customers should use the official customer support channels provided by KeyroRent."
+    },
+    {
+        "question": "What should I do if the website is not working?",
+        "answer": "Customers can check their internet connection, refresh the page, and contact support if the issue continues."
+    },
+    {
+        "question": "Why am I unable to log in to my account?",
+        "answer": "Customers should verify their login credentials and check whether the account recovery process is available."
+    },
+    {
+        "question": "How can I report a problem with a rental?",
+        "answer": "Customers should contact the official support team and provide their booking details and a description of the issue."
+    },
+    {
+        "question": "Where can I get help with my booking?",
+        "answer": "Customers can seek assistance through the official KeyroRent customer support channels."
+    },
+    {
+        "question": "Can I search for rentals in a specific location?",
+        "answer": "Customers can use the location search options available on the platform to find rentals in their preferred area.",
+        "category": "rental_search"
+    },
+    {
+        "question": "How can I compare different rental options?",
+        "answer": "Customers can review the available rental listings and compare the details provided for each option.",
+        "category": "rental_search"
+    },
+    {
+        "question": "Can I view rental photos before booking?",
+        "answer": "Customers can check the photos and descriptions provided in the selected rental listing, if available.",
+        "category": "rental_search"
+    },
+    {
+        "question": "How can I find the details of a rental property?",
+        "answer": "Customers can open the selected rental listing to review its available description and details.",
+        "category": "rental_search"
+    },
+    {
+        "question": "How can I communicate with a rental provider before making a reservation?",
+        "answer": "Customers should check whether contact options are provided for the selected rental on the platform.",
+        "category": "rental_search"
+    },
+    {
+        "question": "What changes can I make to an already confirmed rental booking?",
+        "answer": "Booking changes depend on the modification options, availability, and terms applicable to the selected rental.",
+        "category": "booking"
+    },
+    {
+        "question": "What should I do if I do not receive a booking confirmation?",
+        "answer": "Customers should check their booking status and payment transaction details. If confirmation is still unavailable, they should contact official support.",
+        "category": "booking"
+    },
+    {
+        "question": "Can I make multiple rental bookings?",
+        "answer": "Customers should check the booking options and applicable conditions on the platform before making multiple reservations.",
+        "category": "booking"
+    },
+    {
+        "question": "How can I check the status of my reservation?",
+        "answer": "Customers can review their reservation status through the available account or booking details section.",
+        "category": "booking"
+    },
+    {
+        "question": "What information should I provide when contacting support about a booking?",
+        "answer": "Customers should provide their booking reference, registered contact details, and a clear description of the issue through official support channels.",
+        "category": "support"
+    },
+    {
+        "question": "What should I do if my payment is deducted but my booking is not confirmed?",
+        "answer": "Customers should retain the transaction reference, verify their booking status, and contact official support for assistance.",
+        "category": "payment"
+    },
+    {
+        "question": "Can I download my payment receipt?",
+        "answer": "Customers should check their booking or transaction details for an available receipt or download option.",
+        "category": "payment"
+    },
+    {
+        "question": "How can I report an incorrect rental charge?",
+        "answer": "Customers should retain the transaction details and contact official support with the booking reference and charge information.",
+        "category": "payment"
+    },
+    {
+        "question": "What should I do if my refund amount seems incorrect?",
+        "answer": "Customers should review their refund and transaction details and contact official support for clarification.",
+        "category": "refund"
+    },
+    {
+        "question": "Can I track a refund using my transaction reference?",
+        "answer": "Customers should provide their transaction reference to the official support team when requesting refund assistance.",
+        "category": "refund"
+    },
+    {
+        "question": "Does KeyroRent provide insurance for rented vehicles?",
+        "answer": "Insurance availability and coverage have not been verified. Customers should confirm the applicable insurance details with KeyroRent support or the rental provider before booking.",
+        "category": "insurance"
+    },
+    {
+        "question": "What should I do if a rented vehicle gets damaged?",
+        "answer": "Customers should contact the rental provider and official support immediately and follow the instructions in their rental agreement.",
+        "category": "vehicle_support"
+    },
+    {
+        "question": "What should I do in case of an accident during my rental?",
+        "answer": "Customers should prioritize immediate safety, contact emergency services if necessary, and notify the rental provider and official support.",
+        "category": "vehicle_support"
+    },
+    {
+        "question": "What should I check before accepting a rented vehicle?",
+        "answer": "Customers should inspect the vehicle's visible condition, review the rental details, and report any existing damage to the rental provider before accepting it.",
+        "category": "vehicle_support"
+    },
+    {
+        "question": "How can I report an issue with the rental pickup process?",
+        "answer": "Customers should contact the rental provider or official support and provide their booking reference and details of the pickup issue.",
+        "category": "vehicle_support"
+    },
+    {
+        "question": "How can I confirm the pickup location for my rental?",
+        "answer": "Customers should review the pickup location shown in their booking details or contact the rental provider for confirmation.",
+        "category": "pickup_dropoff"
+    },
+    {
+        "question": "What should I do if the rental vehicle is not available at the pickup location?",
+        "answer": "Customers should contact the rental provider and official support immediately and share their booking reference and pickup details.",
+        "category": "pickup_dropoff"
+    },
+    {
+        "question": "Can I request a different vehicle drop-off location?",
+        "answer": "A different drop-off location may depend on the rental provider's options and the applicable rental terms. Customers should confirm before making changes.",
+        "category": "pickup_dropoff"
+    },
+    {
+        "question": "What documents are required to rent a vehicle?",
+        "answer": "Required documents may depend on the vehicle, rental provider, and applicable terms. Customers should verify the requirements before booking.",
+        "category": "rental_rules"
+    },
+    {
+        "question": "Is there a minimum age requirement for renting a vehicle?",
+        "answer": "The minimum age requirement has not been verified. Customers should confirm the applicable eligibility conditions with the rental provider before booking.",
+        "category": "rental_rules"
+    },
+    {
+        "question": "Can another person drive my rented vehicle?",
+        "answer": "Additional driver permissions depend on the rental agreement and provider's conditions. Customers should obtain confirmation before allowing another person to drive.",
+        "category": "rental_rules"
+    },
+    {
+        "question": "Are there any mileage limits for rented vehicles?",
+        "answer": "Mileage limits may vary depending on the selected rental and its terms. Customers should check the rental listing or agreement for details.",
+        "category": "rental_rules"
+    },
+    {
+        "question": "What should I do if I accidentally booked the wrong rental dates?",
+        "answer": "Customers should review the available booking modification options and contact official support if assistance is needed.",
+        "category": "booking_problems"
+    },
+    {
+        "question": "What should I do if I receive an incorrect booking confirmation?",
+        "answer": "Customers should compare the confirmation with their original booking details and contact official support with the booking reference.",
+        "category": "booking_problems"
+    },
+    {
+        "question": "How can I report a duplicate booking?",
+        "answer": "Customers should collect both booking references and contact official support to request verification and assistance.",
+        "category": "booking_problems"
+    },
+    {
+        "question": "How can I make sure I am using the correct payment page?",
+        "answer": "Customers should access payment options through the official KeyroRent platform and avoid entering payment information on suspicious or unverified pages.",
+        "category": "payment_security"
+    },
+    {
+        "question": "What should I do if I notice an unauthorized rental payment?",
+        "answer": "Customers should contact their bank or payment provider immediately and report the transaction to official KeyroRent support.",
+        "category": "payment_security"
+    },
+    {
+        "question": "Should I share my payment password or OTP with a rental provider?",
+        "answer": "No. Customers should never share their payment passwords, PINs, or OTPs with anyone. They should use only the secure payment process provided by their payment provider.",
+        "category": "payment_security"
+    },
+    {
+        "question": "What should I do if my booking cancellation is still pending?",
+        "answer": "Customers should check their booking status and contact official support with the booking reference if the cancellation remains pending.",
+        "category": "cancellation_refund"
+    },
+    {
+        "question": "What should I do if I do not receive a cancellation confirmation?",
+        "answer": "Customers should verify the booking status through their account and contact official support if cancellation confirmation is unavailable.",
+        "category": "cancellation_refund"
+    },
+    {
+        "question": "Will I be charged a cancellation fee?",
+        "answer": "Cancellation fees depend on the applicable rental and cancellation terms. Customers should review their booking conditions or contact official support for confirmation.",
+        "category": "cancellation_refund"
+    },
+    {
+        "question": "How can I submit a complaint about a rental experience?",
+        "answer": "Customers should contact official support and provide their booking reference, a description of the issue, and any relevant supporting details.",
+        "category": "customer_complaints"
+    },
+    {
+        "question": "How can I report inappropriate behavior by a rental provider?",
+        "answer": "Customers should report the incident to official support with the booking reference and a clear description of what happened.",
+        "category": "customer_complaints"
+    },
+    {
+        "question": "What should I do if I leave a personal item inside a returned rental vehicle?",
+        "answer": "Customers should contact the rental provider and official support as soon as possible, providing the booking details and a description of the missing item.",
+        "category": "customer_complaints"
+    },
+    {
+        "question": "Can I use my email address to register?",
+        "answer": "Customers should check the registration options available on the official KeyroRent platform.",
+        "category": "account"
+    },
+    {
+        "question": "How can I verify my KeyroRent account?",
+        "answer": "Customers should follow the account verification instructions provided by the official KeyroRent platform.",
+        "category": "account"
+    },
+    {
+        "question": "Can I access my account from another device?",
+        "answer": "Customers should use the official KeyroRent platform and follow its available login and security procedures.",
+        "category": "account"
+    },
+    {
+        "question": "How can I change my account password?",
+        "answer": "Customers should check their account settings for the available password change option and follow the instructions.",
+        "category": "profile"
+    },
+    {
+        "question": "How can I update my registered email address?",
+        "answer": "Customers should check their account profile settings or contact official support for assistance with updating their registered email address.",
+        "category": "profile"
+    },
+    {
+        "question": "How can I update my phone number?",
+        "answer": "Customers should review the profile settings for available phone number update options. If assistance is needed, they should contact official support.",
+        "category": "profile"
+    },
+    {
+        "question": "What should I do if my account details are incorrect?",
+        "answer": "Customers should review their profile information and contact official support if they cannot correct the details themselves.",
+        "category": "profile"
+    },
+    {
+        "question": "Can I view the amenities included in a rental?",
+        "answer": "Customers should review the amenities and features listed in the selected rental description, if available.",
+        "category": "rental_listing"
+    },
+    {
+        "question": "How can I find out the rental terms and conditions?",
+        "answer": "Customers should review the terms and conditions provided in the selected rental listing or agreement before confirming a reservation.",
+        "category": "rental_listing"
+    },
+    {
+        "question": "What should I do if rental listing information is incorrect?",
+        "answer": "Customers should contact official support and share the rental listing details along with a description of the incorrect information.",
+        "category": "rental_listing"
+    },
+    {
+        "question": "How can I view my previous rental bookings?",
+        "answer": "Customers should check the booking history or reservations section available in their KeyroRent account.",
+        "category": "booking"
+    },
+    {
+        "question": "Can I check the details of my upcoming reservation?",
+        "answer": "Customers should open their account's booking or reservation section to review the available details of upcoming rentals.",
+        "category": "booking"
+    },
+    {
+        "question": "How can I contact the provider regarding my confirmed booking?",
+        "answer": "Customers should check their booking details for available provider contact options.",
+        "category": "booking"
+    },
+    {
+        "question": "What should I do if my booking details are missing from my account?",
+        "answer": "Customers should verify their booking confirmation and registered account details. If the reservation is still missing, they should contact official support with their booking reference.",
+        "category": "booking"
+    },
+    {
+        "question": "What should I do if I receive an error while using KeyroRent?",
+        "answer": "Customers should note the error message, try again, and contact official support with the error details if the problem continues.",
+        "category": "technical_support"
+    },
+    {
+        "question": "How can I report a technical problem with my account?",
+        "answer": "Customers should contact official support and provide a description of the technical issue and any relevant error messages.",
+        "category": "technical_support"
+    }
+]

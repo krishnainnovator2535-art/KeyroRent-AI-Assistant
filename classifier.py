@@ -13,6 +13,23 @@ def old_classify_question(question):
     if question in greetings:
         return "greeting"
 
+    normalized = question.replace(",", " ")
+    normalized = normalized.replace(".", " ")
+    normalized = normalized.replace("!", " ")
+    normalized = normalized.replace("?", " ")
+
+    tokens = normalized.split()
+
+    greeting_words = {"hi", "hello", "hey", "hii", "helo"}
+    brand_words = {"keyrorent", "ai", "assistant"}
+
+    if (
+        tokens
+        and tokens[0] in greeting_words
+        and all(word in brand_words for word in tokens[1:])
+    ):
+        return "greeting"
+
     gratitude = [
         "thank you", "thanks",
         "thankyou", "thx"

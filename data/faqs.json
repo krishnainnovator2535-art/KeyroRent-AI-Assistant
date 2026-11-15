@@ -1,167 +1,208 @@
 [
     {
         "question": "What is KeyroRent?",
-        "answer": "KeyroRent is a rental platform that helps customers find and rent properties or rental services."
+        "answer": "KeyroRent is a rental platform that helps customers find and rent properties or rental services.",
+        "category": "general"
     },
     {
         "question": "How can I contact customer support?",
-        "answer": "Customers can contact customer support through the official support channel provided by KeyroRent."
+        "answer": "Customers can contact customer support through the official support channel provided by KeyroRent.",
+        "category": "support"
     },
     {
         "question": "How can I make a booking?",
-        "answer": "Customers can browse available rental options, select their preferred option, and follow the booking instructions on the platform."
+        "answer": "Customers can browse available rental options, select their preferred option, and follow the booking instructions on the platform.",
+        "category": "booking"
     },
     {
         "question": "Can I cancel my booking?",
-        "answer": "Booking cancellation depends on the cancellation policy applicable to the selected rental."
+        "answer": "Booking cancellation depends on the cancellation policy applicable to the selected rental.",
+        "category": "cancellation_refund"
     },
     {
         "question": "How do I get a refund?",
-        "answer": "Refund eligibility and processing time depend on the applicable rental and refund policy."
+        "answer": "Refund eligibility and processing time depend on the applicable rental and refund policy.",
+        "category": "refund"
     },
     {
         "question": "What should I do if I face a technical issue?",
-        "answer": "Customers should contact the support team and provide details about the issue they are facing."
+        "answer": "Customers should contact the support team and provide details about the issue they are facing.",
+        "category": "technical_support"
     },
     {
         "question": "How can I create a KeyroRent account?",
-        "answer": "Customers can create an account by following the registration process and providing the required information."
+        "answer": "Customers can create an account by following the registration process and providing the required information.",
+        "category": "account"
     },
     {
         "question": "How do I log in to my KeyroRent account?",
-        "answer": "Customers can log in using their registered account credentials."
+        "answer": "Customers can log in using their registered account credentials.",
+        "category": "account"
     },
     {
         "question": "What should I do if I forget my password?",
-        "answer": "Customers should use the password recovery option, if available, to reset their password."
+        "answer": "Customers should use the password recovery option, if available, to reset their password.",
+        "category": "account"
     },
     {
         "question": "Can I update my profile information?",
-        "answer": "Customers can update their profile information through the account settings, if this feature is available."
+        "answer": "Customers can update their profile information through the account settings, if this feature is available.",
+        "category": "profile"
     },
     {
         "question": "How can I delete my account?",
-        "answer": "Customers should contact the official support team to understand the account deletion process."
+        "answer": "Customers should contact the official support team to understand the account deletion process.",
+        "category": "account"
     },
     {
         "question": "How can I find available rental options?",
-        "answer": "Customers can browse rental listings and review the available options on the platform."
+        "answer": "Customers can browse rental listings and review the available options on the platform.",
+        "category": "rental_search"
     },
     {
         "question": "How do I check whether a rental is available?",
-        "answer": "Customers can check the availability information provided in the selected rental listing."
+        "answer": "Customers can check the availability information provided in the selected rental listing.",
+        "category": "rental_search"
     },
     {
         "question": "Can I book a rental in advance?",
-        "answer": "Advance booking depends on the availability and booking options provided for the selected rental."
+        "answer": "Advance booking depends on the availability and booking options provided for the selected rental.",
+        "category": "booking"
     },
     {
         "question": "How do I know whether my booking is confirmed?",
-        "answer": "Customers should check their booking status and confirmation details through the platform."
+        "answer": "Customers should check their booking status and confirmation details through the platform.",
+        "category": "booking"
     },
     {
         "question": "Can I change my booking date?",
-        "answer": "Booking date changes depend on the applicable rental modification policy and availability."
+        "answer": "Booking date changes depend on the applicable rental modification policy and availability.",
+        "category": "booking_problems"
     },
     {
         "question": "Can I modify my rental booking?",
-        "answer": "Booking modifications depend on the terms and conditions applicable to the selected rental."
+        "answer": "Booking modifications depend on the terms and conditions applicable to the selected rental.",
+        "category": "booking_problems"
     },
     {
         "question": "Where can I find my booking details?",
-        "answer": "Customers can check their booking details through the account or booking history section, if available."
+        "answer": "Customers can check their booking details through the account or booking history section, if available.",
+        "category": "booking"
     },
     {
         "question": "What payment methods can I use?",
-        "answer": "Customers should check the payment methods displayed on the official platform during checkout."
+        "answer": "Customers should check the payment methods displayed on the official platform during checkout.",
+        "category": "payment"
     },
     {
         "question": "Why did my rental payment fail?",
-        "answer": "Payment failures can occur for different reasons. Customers should verify their payment details and transaction status."
+        "answer": "Payment failures can occur for different reasons. Customers should verify their payment details and transaction status.",
+        "category": "payment"
     },
     {
         "question": "How can I verify my payment transaction?",
-        "answer": "Customers can review their transaction details through the available payment or booking section."
+        "answer": "Customers can review their transaction details through the available payment or booking section.",
+        "category": "payment_security"
     },
     {
         "question": "Will I receive payment confirmation?",
-        "answer": "Customers should check the platform for payment confirmation and transaction status."
+        "answer": "Customers should check the platform for payment confirmation and transaction status.",
+        "category": "payment_security"
     },
     {
         "question": "How can I understand the rental price?",
-        "answer": "Customers should review the pricing details displayed in the selected rental listing before booking."
+        "answer": "Customers should review the pricing details displayed in the selected rental listing before booking.",
+        "category": "rental_listing"
     },
     {
         "question": "Are there any hidden charges?",
-        "answer": "Customers should review the complete pricing breakdown and applicable terms before confirming a booking."
+        "answer": "Customers should review the complete pricing breakdown and applicable terms before confirming a booking.",
+        "category": "rental_listing"
     },
     {
         "question": "What should I do if I am charged twice?",
-        "answer": "Customers should retain both transaction references and contact the official support team for assistance."
+        "answer": "Customers should retain both transaction references and contact the official support team for assistance.",
+        "category": "payment"
     },
     {
         "question": "How can I cancel a confirmed booking?",
-        "answer": "Customers should follow the cancellation process provided for their selected rental."
+        "answer": "Customers should follow the cancellation process provided for their selected rental.",
+        "category": "cancellation_refund"
     },
     {
         "question": "Will I get a refund after cancelling?",
-        "answer": "Refund eligibility depends on the applicable cancellation and refund policy."
+        "answer": "Refund eligibility depends on the applicable cancellation and refund policy.",
+        "category": "cancellation_refund"
     },
     {
         "question": "How can I check my refund status?",
-        "answer": "Customers should check their refund or transaction status through the available platform details or contact support."
+        "answer": "Customers should check their refund or transaction status through the available platform details or contact support.",
+        "category": "refund"
     },
     {
         "question": "Why is my refund delayed?",
-        "answer": "Refund delays can depend on the applicable refund process and payment provider. Customers should contact support for assistance."
+        "answer": "Refund delays can depend on the applicable refund process and payment provider. Customers should contact support for assistance.",
+        "category": "refund"
     },
     {
         "question": "Can I request a refund for a failed booking?",
-        "answer": "Refund eligibility for failed bookings depends on the transaction status and applicable refund policy."
+        "answer": "Refund eligibility for failed bookings depends on the transaction status and applicable refund policy.",
+        "category": "refund"
     },
     {
         "question": "What should I do if my refund is not received?",
-        "answer": "Customers should keep their transaction reference and contact the official support team."
+        "answer": "Customers should keep their transaction reference and contact the official support team.",
+        "category": "refund"
     },
     {
         "question": "Can I extend my rental duration?",
-        "answer": "Rental extensions depend on availability and the terms applicable to the selected rental."
+        "answer": "Rental extensions depend on availability and the terms applicable to the selected rental.",
+        "category": "rental_rules"
     },
     {
         "question": "What happens if I return a rental late?",
-        "answer": "Late return conditions and any applicable charges depend on the rental agreement."
+        "answer": "Late return conditions and any applicable charges depend on the rental agreement.",
+        "category": "rental_rules"
     },
     {
         "question": "How can I check my rental end date?",
-        "answer": "Customers should review their booking confirmation or rental details to find the rental end date."
+        "answer": "Customers should review their booking confirmation or rental details to find the rental end date.",
+        "category": "rental_rules"
     },
     {
         "question": "Can I return a rental before the scheduled date?",
-        "answer": "Early returns depend on the terms and conditions applicable to the selected rental."
+        "answer": "Early returns depend on the terms and conditions applicable to the selected rental.",
+        "category": "rental_rules"
     },
     {
         "question": "What should I do if I cannot return my rental on time?",
-        "answer": "Customers should contact the rental provider or official support team as soon as possible."
+        "answer": "Customers should contact the rental provider or official support team as soon as possible.",
+        "category": "rental_rules"
     },
     {
         "question": "How can I contact the KeyroRent support team?",
-        "answer": "Customers should use the official customer support channels provided by KeyroRent."
+        "answer": "Customers should use the official customer support channels provided by KeyroRent.",
+        "category": "support"
     },
     {
         "question": "What should I do if the website is not working?",
-        "answer": "Customers can check their internet connection, refresh the page, and contact support if the issue continues."
+        "answer": "Customers can check their internet connection, refresh the page, and contact support if the issue continues.",
+        "category": "technical_support"
     },
     {
         "question": "Why am I unable to log in to my account?",
-        "answer": "Customers should verify their login credentials and check whether the account recovery process is available."
+        "answer": "Customers should verify their login credentials and check whether the account recovery process is available.",
+        "category": "account"
     },
     {
         "question": "How can I report a problem with a rental?",
-        "answer": "Customers should contact the official support team and provide their booking details and a description of the issue."
+        "answer": "Customers should contact the official support team and provide their booking details and a description of the issue.",
+        "category": "vehicle_support"
     },
     {
         "question": "Where can I get help with my booking?",
-        "answer": "Customers can seek assistance through the official KeyroRent customer support channels."
+        "answer": "Customers can seek assistance through the official KeyroRent customer support channels.",
+        "category": "support"
     },
     {
         "question": "Can I search for rentals in a specific location?",

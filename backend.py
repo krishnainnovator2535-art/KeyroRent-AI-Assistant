@@ -2,11 +2,12 @@ import os
 from pathlib import Path
 from typing import List, Literal
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 from dotenv import load_dotenv
 
 from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_google_genai.chat_models import GoogleRateLimitError
 from langchain_core.prompts import ChatPromptTemplate
 
 from knowledge_base import (
@@ -185,19 +186,46 @@ def chat(request: ChatRequest):
         for message in request.chat_history
     ]
 
-    answer = keyrorent_chatbot_with_memory(
-        question=request.question,
-        chat_history=history,
-        llm=llm,
-        bm25_index=bm25_index,
-        rag_prompt=rag_prompt,
-        conversation_context_prompt=conversation_context_prompt
-    )
+    try:
 
-    return ChatResponse(
-        question=request.question,
-        answer=answer
-    )
+        answer = keyrorent_chatbot_with_memory(
+            question=request.question,
+            chat_history=history,
+            llm=llm,
+            bm25_index=bm25_index,
+            rag_prompt=rag_prompt,
+            conversation_context_prompt=conversation_context_prompt
+        )
+
+        return ChatResponse(
+            question=request.question,
+            answer=answer
+        )
+
+    except GoogleRateLimitError:
+
+        print("Gemini API quota or rate limit reached.")
+
+        raise HTTPException(
+            status_code=503,
+            detail=(
+                "Our AI assistant is temporarily unavailable because "
+                "the service has reached its current usage limit. "
+                "Please try again later. We apologize for the inconvenience."
+            )
+        )
+
+    except Exception:
+
+        print("Unexpected error while processing a chat request.")
+
+        raise HTTPException(
+            status_code=503,
+            detail=(
+                "We're sorry, but the assistant couldn't process "
+                "your request right now. Please try again later."
+            )
+        )
 
 
 print("API models added successfully!")

@@ -10,10 +10,16 @@ import textwrap
 # CONFIGURATION
 # ==========================================
 
-API_URL = st.secrets.get(
-    "API_URL",
-    os.getenv("API_URL", "http://127.0.0.1:8000")
-)
+try:
+    API_URL = st.secrets.get(
+        "API_URL",
+        os.getenv("API_URL", "https://keyrorent-ai-assistant.onrender.com")
+    )
+except st.errors.StreamlitSecretNotFoundError:
+    API_URL = os.getenv(
+        "API_URL",
+        "https://keyrorent-ai-assistant.onrender.com"
+    )
 
 POSTER_PATH = "KeyroRent AI Rental Assistant.png"
 
@@ -672,19 +678,36 @@ elif st.session_state.page == "chat":
                 answer = response.json()["answer"]
 
 
-        except requests.exceptions.RequestException as e:
+        except requests.exceptions.HTTPError as e:
 
-            st.error(f"DEBUG - API Request Error: {repr(e)}")
+            error_message = (
+                "Our AI assistant is temporarily unavailable. "
+                "Please try again later. We apologize for the inconvenience."
+            )
+
+            try:
+                error_detail = e.response.json().get("detail")
+
+                if error_detail:
+                    error_message = error_detail
+
+            except (ValueError, AttributeError):
+                pass
+
+            answer = error_message
+
+        except requests.exceptions.RequestException:
 
             answer = (
-                "Sorry, the chatbot service is currently unavailable. "
-                "Please try again later."
+                "We're unable to connect to the assistant right now. "
+                "Please check your internet connection and try again."
             )
 
         except (KeyError, ValueError):
 
             answer = (
-                "Sorry, something went wrong while processing your request."
+                "Sorry, something went wrong while processing your request. "
+                "Please try again later."
             )
 
 

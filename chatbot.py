@@ -108,31 +108,34 @@ def select_relevant_documents(query, results, max_docs=10):
 
     relevant_docs = []
 
+    query_tokens = expand_important_tokens(query)
+
+    if not query_tokens:
+        return []
+
     for doc, score in results:
 
         faq_question = doc.metadata.get("question", "")
+        faq_tokens = expand_important_tokens(faq_question)
 
-        overlap = calculate_keyword_overlap(
-            query,
-            faq_question
-        )
+        common_tokens = query_tokens.intersection(faq_tokens)
 
-        relevant_docs.append(
-            (doc, float(score), overlap)
-        )
+        overlap = len(common_tokens) / len(query_tokens)
+
+        if overlap >= 0.5:
+            relevant_docs.append(
+                (doc, float(score), overlap)
+            )
 
     relevant_docs.sort(
-        key=lambda item: (item[1], item[2]),
+        key=lambda item: (item[2], item[1]),
         reverse=True
     )
 
     return [
         doc
-        for doc, score, overlap
-        in relevant_docs[:max_docs]
+        for doc, score, overlap in relevant_docs[:max_docs]
     ]
-
-
 def build_context_aware_search_question(
     contextual_question,
     chat_history

@@ -1,0 +1,50 @@
+def expand_rental_query(question):
+
+    q = question.lower()
+    terms = []
+
+    if "payment" in q or "pay" in q:
+        terms.append("payment methods accepted transaction")
+
+    if any(term in q for term in ["collect", "pickup", "pick up", "pick-up"]):
+        terms.append("pickup location pick up collect vehicle confirm where to get rental car vehicle")
+
+    if "document" in q or "carry" in q:
+        terms.append("documents required rent vehicle")
+
+    if "cancel" in q or "cancellation" in q:
+        terms.append("cancel booking cancellation confirmed reservation")
+
+    if "refund" in q or "money back" in q:
+        terms.append("refund status money returned reimbursement")
+
+    if "confirmed" in q or "confirmation" in q:
+        terms.append("booking confirmed reservation confirmation status")
+
+    if "hidden charges" in q or "extra charges" in q:
+        terms.append("hidden fees additional costs pricing")
+
+    # Mileage query expansion
+    if any(term in q for term in [
+        "mileage", "kilometer", "kilometre",
+        "distance", "unlimited miles"
+    ]):
+        terms.append(
+            "mileage limits distance kilometers allowance "
+            "kilometres miles permitted travel distance"
+        )
+
+    # Extra driver query expansion
+    if (
+        "driver" in q
+        or "another person" in q
+        or "someone else" in q
+    ):
+        terms.append(
+            "another person drive rented vehicle additional driver permission"
+        )
+
+    return question + " " + " ".join(terms)
+
+
+# BM25 INDEX

@@ -6,3 +6,4 @@ python-dotenv
 langchain-google-genai
 langchain-core
 rank-bm25
+slowapi

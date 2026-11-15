@@ -35,38 +35,227 @@ def expand_rental_query(question):
     q = question.lower()
     terms = []
 
-    if "payment" in q or "pay" in q:
-        terms.append("payment methods accepted transaction")
+    # Double payment intent
+    if any(term in q for term in [
+        "charged twice", "double payment",
+        "paid twice", "deducted twice"
+    ]):
+        terms.append(
+            "duplicate charge charged twice payment deducted twice"
+        )
 
-    if any(term in q for term in ["collect", "pickup", "pick up", "pick-up"]):
-        terms.append("pickup location pick up collect vehicle confirm where to get rental car vehicle")
+    # Refund process intent
+    elif any(term in q for term in [
+        "money back", "get a refund",
+        "want my money", "receive my money"
+    ]):
+        terms.append(
+            "refund money returned reimbursement refund process"
+        )
 
+    # Refund status intent
+    elif any(term in q for term in [
+        "refund status", "refund delayed",
+        "refund not received", "track refund"
+    ]):
+        terms.append(
+            "refund status delayed tracking transaction reference"
+        )
+
+    # Booking cancellation intent
+    if any(term in q for term in [
+        "cancel my booking", "cancel a booking",
+        "cancel booking", "cancellation"
+    ]):
+        terms.append(
+            "cancel booking cancellation reservation"
+        )
+
+    # Pickup location intent
+    if any(term in q for term in [
+        "collect my rental",
+        "collect vehicle",
+        "pickup location",
+        "where should i go",
+        "where do i collect",
+        "where can i collect"
+    ]):
+        terms.append(
+            "pickup location confirm pickup point "
+            "where to collect rental vehicle collection"
+        )
+
+    # Missing booking confirmation
+    if any(term in q for term in [
+        "not received a confirmation",
+        "haven't received a confirmation",
+        "missing confirmation",
+        "no confirmation message"
+    ]):
+        terms.append(
+            "booking confirmation not received confirmation message"
+        )
+
+    # Payment verification
+    elif (
+        ("payment" in q or "transaction" in q)
+        and not any(term in q for term in [
+            "without permission",
+            "unauthorized",
+            "unrecognized payment",
+            "someone made a payment"
+        ])
+    ):
+        terms.append(
+            "payment verification transaction payment confirmation"
+        )
+
+    # Account deletion intent
+    if any(term in q for term in [
+        "close my account",
+        "close my keyrorent account",
+        "delete my account",
+        "delete my keyrorent account",
+        "deactivate my account",
+        "remove my account"
+    ]):
+        terms.append(
+            "delete account close account account deletion"
+        )
+
+    # Advance booking intent
+    if any(term in q for term in [
+        "before my travel date",
+        "book in advance",
+        "reserve in advance",
+        "book early"
+    ]):
+        terms.append(
+            "advance booking reserve vehicle beforehand "
+            "book rental in advance"
+        )
+
+    # Additional charges intent
+    if any(term in q for term in [
+        "additional fees",
+        "extra charges",
+        "additional charges",
+        "hidden charges"
+    ]):
+        terms.append(
+            "hidden charges extra fees additional costs "
+            "rental price"
+        )
+
+    # Rental extension intent
+    if any(term in q for term in [
+        "additional days",
+        "extend my rental",
+        "keep the rental",
+        "extra days"
+    ]):
+        terms.append(
+            "extend rental duration extension additional days"
+        )
+
+    # Minimum age intent
+    if any(term in q for term in [
+        "how old",
+        "minimum age",
+        "age requirement",
+        "old must i be"
+    ]):
+        terms.append(
+            "minimum age requirement age eligibility "
+            "renting vehicle"
+        )
+
+    # Unauthorized payment intent
+    if any(term in q for term in [
+        "without permission",
+        "unauthorized payment",
+        "unauthorized rental payment",
+        "unrecognized payment",
+        "someone made a payment"
+    ]):
+        terms.append(
+            "notice unauthorized rental payment "
+            "unauthorized transaction account security"
+        )
+
+    # Account registration intent
+    if any(term in q for term in [
+        "register for a new account",
+        "create a new account",
+        "sign up",
+        "register an account"
+    ]):
+        terms.append(
+            "create new account account registration sign up"
+        )
+
+    # Rental comparison intent
+    if any(term in q for term in [
+        "compare available rental vehicles",
+        "compare rental vehicles",
+        "compare different rental options",
+        "compare available rentals"
+    ]):
+        terms.append(
+            "compare different rental options "
+            "compare rental vehicles"
+        )
+
+    # Rental availability intent
+    if any(term in q for term in [
+        "available rental vehicles",
+        "search for available rentals",
+        "find available vehicles",
+        "available rental options"
+    ]):
+        terms.append(
+            "find available rental options search available vehicles"
+        )
+
+    # Rental photos intent
+    if any(term in q for term in [
+        "see pictures",
+        "view pictures",
+        "vehicle photos",
+        "see photos",
+        "pictures of a vehicle"
+    ]):
+        terms.append(
+            "view rental photos vehicle pictures images before booking"
+        )
+
+    # Incorrect booking dates intent
+    if any(term in q for term in [
+        "incorrect dates",
+        "wrong rental dates",
+        "selected wrong dates",
+        "booked incorrect dates"
+    ]):
+        terms.append(
+            "accidentally booked wrong rental dates incorrect booking dates"
+        )
+
+    # Documents
     if "document" in q or "carry" in q:
-        terms.append("documents required rent vehicle")
+        terms.append(
+            "documents required rent vehicle"
+        )
 
-    if "cancel" in q or "cancellation" in q:
-        terms.append("cancel booking cancellation confirmed reservation")
-
-    if "refund" in q or "money back" in q:
-        terms.append("refund status money returned reimbursement")
-
-    if "confirmed" in q or "confirmation" in q:
-        terms.append("booking confirmed reservation confirmation status")
-
-    if "hidden charges" in q or "extra charges" in q:
-        terms.append("hidden fees additional costs pricing")
-
-    # Mileage query expansion
+    # Mileage
     if any(term in q for term in [
         "mileage", "kilometer", "kilometre",
         "distance", "unlimited miles"
     ]):
         terms.append(
-            "mileage limits distance kilometers allowance "
-            "kilometres miles permitted travel distance"
+            "mileage limits distance kilometers allowance miles"
         )
 
-    # Extra driver query expansion
+    # Additional driver
     if (
         "driver" in q
         or "another person" in q
@@ -77,9 +266,6 @@ def expand_rental_query(question):
         )
 
     return question + " " + " ".join(terms)
-
-
-# BM25 INDEX
 
 class BM25Index:
 

@@ -2,9 +2,14 @@ import os
 from pathlib import Path
 from typing import List, Literal
 
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel, Field
+from fastapi import FastAPI, HTTPException, Request, Request
+from pydantic import BaseModel, Field, field_validator
 from dotenv import load_dotenv
+
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.util import get_remote_address
+from slowapi.errors import RateLimitExceeded
+
 
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_google_genai.chat_models import GoogleRateLimitError
@@ -48,10 +53,21 @@ bm25_index = load_bm25_index(faqs)
 
 # FASTAPI CONFIGURATION
 
+limiter = Limiter(
+    key_func=get_remote_address,
+)
+
 app = FastAPI(
     title="KeyroRent AI Assistant API",
     description="AI-powered rental customer support API",
     version="1.0.0"
+)
+
+app.state.limiter = limiter
+
+app.add_exception_handler(
+    RateLimitExceeded,
+    _rate_limit_exceeded_handler
 )
 
 
@@ -66,19 +82,42 @@ class ChatMessage(BaseModel):
 
     role: Literal["user", "assistant"]
 
-    content: str
+    content: str = Field(
+        min_length=1,
+        max_length=2000
+    )
+
+    @field_validator("content")
+    @classmethod
+    def validate_content(cls, value):
+
+        if not value.strip():
+            raise ValueError("Message cannot be empty.")
+
+        return value.strip()
 
 
 class ChatRequest(BaseModel):
 
     question: str = Field(
         min_length=1,
+        max_length=2000,
         description="Customer rental support question"
     )
 
     chat_history: List[ChatMessage] = Field(
-        default_factory=list
+        default_factory=list,
+        max_length=20
     )
+
+    @field_validator("question")
+    @classmethod
+    def validate_question(cls, value):
+
+        if not value.strip():
+            raise ValueError("Question cannot be empty.")
+
+        return value.strip()
 
 
 class ChatResponse(BaseModel):
@@ -176,20 +215,21 @@ def home():
 # CHAT ENDPOINT
 
 @app.post("/chat", response_model=ChatResponse)
-def chat(request: ChatRequest):
+@limiter.limit("10/minute")
+def chat(request: Request, chat_request: ChatRequest):
 
     history = [
         {
             "role": message.role,
             "content": message.content
         }
-        for message in request.chat_history
+        for message in chat_request.chat_history
     ]
 
     try:
 
         answer = keyrorent_chatbot_with_memory(
-            question=request.question,
+            question=chat_request.question,
             chat_history=history,
             llm=llm,
             bm25_index=bm25_index,
@@ -198,7 +238,7 @@ def chat(request: ChatRequest):
         )
 
         return ChatResponse(
-            question=request.question,
+            question=chat_request.question,
             answer=answer
         )
 

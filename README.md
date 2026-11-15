@@ -7,7 +7,7 @@ An AI-powered rental customer support chatbot built using Generative AI, RAG (Re
 
 KeyroRent AI Assistant is an intelligent customer support chatbot designed to answer rental-related questions.
 
-It uses a Frequently Asked Questions (FAQ) knowledge base and a FAISS vector database to retrieve relevant information and generate helpful responses using Google's Gemini model.
+It uses a Frequently Asked Questions (FAQ) knowledge base and a BM25-based retrieval engine to retrieve relevant information and generate helpful responses using Google's Gemini model.
 
 ## ✨ Key Features
 
@@ -30,9 +30,12 @@ It uses a Frequently Asked Questions (FAQ) knowledge base and a FAISS vector dat
 - LangChain
 - FastAPI
 - Streamlit
-- FAISS
-- Sentence Transformers
-- Hugging Face
+- BM25 (rank-bm25)
+- Pydantic
+- SlowAPI
+- Pytest
+- Git and GitHub
+- Render
 - REST API
 
 ## 🏗️ Project Architecture
@@ -56,7 +59,7 @@ Question Classification
 Conversation Context
    |
    v
-FAISS Vector Database
+BM25 Retrieval Engine
    |
    v
 Relevant FAQ Retrieval
@@ -66,3 +69,71 @@ Google Gemini
    |
    v
 Final Response
+```
+
+## 🧪 Testing
+
+- 22 automated tests passed using Pytest.
+- Retrieval evaluation performed using 70 test cases.
+- Input validation tested.
+- Unsupported-question handling tested.
+- API rate limiting tested locally and on the deployed backend.
+- Backend health endpoint verified.
+
+Note: Evaluation results apply to the current test dataset and do not guarantee perfect results for unseen questions.
+
+## 🚀 Deployment
+
+- Backend: Render
+- Frontend: Streamlit Community Cloud
+
+Backend health endpoint:
+
+https://keyrorent-ai-assistant.onrender.com/
+
+## ⚙️ Run Locally
+
+Clone the repository:
+
+```bash
+git clone https://github.com/krishnainnovator2535-art/KeyroRent-AI-Assistant.git
+cd KeyroRent-AI-Assistant
+```
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Set your Gemini API key using the GEMINI_API_KEY environment variable.
+
+Start the backend:
+
+```bash
+uvicorn backend:app --reload
+```
+
+Start the frontend in another terminal:
+
+```bash
+streamlit run streamlit_app.py
+```
+
+## 🔐 Security
+
+- Input validation using Pydantic.
+- API rate limiting using SlowAPI.
+- API keys managed through environment variables and deployment secrets.
+- Graceful handling of Gemini quota and service errors.
+
+## ⚠️ Project Limitations
+
+- Uses sample FAQ data for demonstration.
+- Does not access real customer accounts or booking databases.
+- Does not perform actual bookings, cancellations, payments, or refunds.
+- Production use requires verified rental policies and secure backend integrations.
+
+## 👨‍💻 Author
+
+Developed as a Generative AI portfolio project.

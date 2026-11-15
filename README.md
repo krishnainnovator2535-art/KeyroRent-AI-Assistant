@@ -87,6 +87,12 @@ Note: Evaluation results apply to the current test dataset and do not guarantee 
 - Backend: Render
 - Frontend: Streamlit Community Cloud
 
+### 🌐 Live Demo & API
+
+- **Live Application:** https://keyrorent-ai-assistant-ewaxixsaymirxeatsimid6.streamlit.app/
+- **Backend API:** https://keyrorent-ai-assistant.onrender.com
+- **Backend Health Check:** https://keyrorent-ai-assistant.onrender.com/health
+
 Backend health endpoint:
 
 https://keyrorent-ai-assistant.onrender.com/
@@ -136,4 +142,8 @@ streamlit run streamlit_app.py
 
 ## 👨‍💻 Author
 
-Developed as a Generative AI portfolio project.
+**Krishna**
+
+Generative AI Enthusiast | B.Tech ECE Graduate
+
+[GitHub Profile](https://github.com/krishnainnovator2535-art)

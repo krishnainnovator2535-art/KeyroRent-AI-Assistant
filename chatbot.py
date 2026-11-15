@@ -20,7 +20,7 @@ STOP_WORDS = {
     "the", "a", "an", "to", "for", "of", "in",
     "on", "my", "me", "i", "we", "you",
     "and", "or", "be", "it",
-    "keyrorent", "provide", "get", "have",
+    "provide", "get", "have",
     "please", "tell", "about", "want"
 }
 
